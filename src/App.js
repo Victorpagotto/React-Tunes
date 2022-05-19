@@ -7,18 +7,75 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import { getUser } from './services/userAPI';
 
 class App extends React.Component {
+  state = {
+    userInfo: {
+      name: '',
+    },
+    loading: false,
+  }
+
+  handleUser = () => {
+    console.log('done');
+    this.setState({ loading: true }, async () => {
+      const user = await getUser();
+      this.setState({ loading: false, userInfo: user });
+    });
+  }
+
   render() {
+    const { userInfo, loading } = this.state;
     return (
       <section>
         <Router>
           <Switch>
-            <Route path="/search" component={ Search } />
-            <Route path="/album/:id" component={ Album } />
-            <Route path="/favorites" component={ Favorites } />
-            <Route path="/profile/edit" component={ ProfileEdit } />
-            <Route path="/profile" component={ Profile } />
+            <Route
+              path="/search"
+              render={ (props) => (<Search
+                { ...props }
+                userInfo={ userInfo }
+                loading={ loading }
+                handleUser={ this.handleUser }
+              />) }
+            />
+            <Route
+              path="/album/:id"
+              render={ (props) => (<Album
+                { ...props }
+                userInfo={ userInfo }
+                loading={ loading }
+                handleUser={ this.handleUser }
+              />) }
+            />
+            <Route
+              path="/favorites"
+              render={ (props) => (<Favorites
+                { ...props }
+                userInfo={ userInfo }
+                loading={ loading }
+                handleUser={ this.handleUser }
+              />) }
+            />
+            <Route
+              path="/profile"
+              render={ (props) => (<Profile
+                { ...props }
+                userInfo={ userInfo }
+                loading={ loading }
+                handleUser={ this.handleUser }
+              />) }
+            />
+            <Route
+              path="/profile/edit"
+              render={ (props) => (<ProfileEdit
+                { ...props }
+                userInfo={ userInfo }
+                loading={ loading }
+                handleUser={ this.handleUser }
+              />) }
+            />
             <Route exact path="/" component={ Login } />
             <Route path="" component={ NotFound } />
           </Switch>

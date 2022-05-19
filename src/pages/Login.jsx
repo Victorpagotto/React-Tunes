@@ -19,7 +19,7 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  sendUsername = async () => {
+  sendUsername = () => {
     console.log('done');
     const { username } = this.state;
     this.setState({ loading: true }, async () => {
