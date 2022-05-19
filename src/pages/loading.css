@@ -1,0 +1,13 @@
+.loading-screen {
+  align-items: center;
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.loading-screen h1 {
+  color: rgb(104, 156, 146, 0.5);
+  font-size: 6em;
+  font-weight: 700;
+}
