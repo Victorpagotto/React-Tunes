@@ -1,0 +1,112 @@
+.album-track-list-container {
+  display: flex;
+  width: 75%;
+  min-width: 480px;
+  margin: auto;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.album-info-container {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  flex-flow: column nowrap;
+  align-self: flex-start;
+  max-width: 300px;
+  text-align: center;
+}
+
+.track-album-image {
+  width: 250px;
+  height: 250px;
+}
+
+.album-names {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-flow: column nowrap;
+  margin-bottom: 50px;
+}
+
+.track-list-container {
+  margin-left: 50px;
+  width: 500px;
+  background-image: linear-gradient(rgb(104, 156, 146, 0.3), rgb(248, 245, 241));
+  border-top: solid 3px rgb(104, 156, 146, 0.5);
+  border-bottom: solid 3px rgb(104, 156, 146, 0.5);
+  padding-top: 20px;
+}
+
+.track-list-container div:first-child {
+  border: none;
+}
+
+.track-list-container div:last-child {
+  border: none;
+}
+
+.album-names p:first-child {
+  font-size: 2em;
+  margin: 0;
+  margin-top: 40px;
+}
+
+.track-album-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.track-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  border-top: solid 3px rgb(104, 156, 146, 0.5);
+  border-bottom: solid 3px rgb(104, 156, 146, 0.5);
+  background-image: linear-gradient(rgba(142, 179, 171, 0.2), rgb(248, 245, 241));
+  margin: auto;
+}
+
+.track-container div {
+  width: inherit;
+}
+
+.track-name-container {
+  text-align: center;
+}
+
+.audio-container {
+  display: flex;
+  align-items:center
+}
+
+.audio {
+  width: inherit;
+}
+
+.favorite-checkbox {
+  display: none;
+}
+
+.favorite-label {
+	color: red;
+  font-size: 2em;
+}
+
+@media only screen and ( max-width: 948px ) {
+  .album-track-list-container {
+    justify-content: center;
+  }
+}
+
+@media only screen and ( max-width: 850px ) {
+  .track-list-container {
+    margin: 0;
+  }
+}

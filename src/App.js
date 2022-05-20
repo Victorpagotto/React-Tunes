@@ -9,6 +9,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import { getUser } from './services/userAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
+import getMusics from './services/musicsAPI';
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,9 @@ class App extends React.Component {
     loading: false,
     albumList: [],
     searchedArtist: '',
+    loadedAlbum: [{
+      artworkUrl100: '',
+    }],
   }
 
   handleUser = () => {
@@ -35,8 +39,19 @@ class App extends React.Component {
     });
   }
 
+  handleAlbum = async (albumId, targetState) => {
+    this.setState({ loading: true }, async () => {
+      const chosenAlbum = await getMusics(albumId);
+      this.setState({ loadedAlbum: chosenAlbum }, () => {
+        targetState.setState({ loadedAlbum: chosenAlbum }, () => {
+          this.setState({ loading: false });
+        });
+      });
+    });
+  }
+
   render() {
-    const { userInfo, loading, albumList, searchedArtist } = this.state;
+    const { userInfo, loading, albumList, searchedArtist, loadedAlbum } = this.state;
     return (
       <section>
         <Router>
@@ -60,6 +75,8 @@ class App extends React.Component {
                 userInfo={ userInfo }
                 loading={ loading }
                 handleUser={ this.handleUser }
+                handleAlbum={ this.handleAlbum }
+                loadedAlbum={ loadedAlbum }
               />) }
             />
             <Route
