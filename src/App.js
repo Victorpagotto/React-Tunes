@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import { getUser } from './services/userAPI';
+import searchAlbumsAPI from './services/searchAlbumsAPI';
 
 class App extends React.Component {
   state = {
@@ -15,6 +16,8 @@ class App extends React.Component {
       name: '',
     },
     loading: false,
+    albumList: [],
+    searchedArtist: '',
   }
 
   handleUser = () => {
@@ -25,8 +28,15 @@ class App extends React.Component {
     });
   }
 
+  handleSearch = (artistName) => {
+    this.setState({ loading: true }, async () => {
+      const albums = await searchAlbumsAPI(artistName);
+      this.setState({ loading: false, albumList: albums, searchedArtist: artistName });
+    });
+  }
+
   render() {
-    const { userInfo, loading } = this.state;
+    const { userInfo, loading, albumList, searchedArtist } = this.state;
     return (
       <section>
         <Router>
@@ -36,8 +46,11 @@ class App extends React.Component {
               render={ (props) => (<Search
                 { ...props }
                 userInfo={ userInfo }
+                albumList={ albumList }
                 loading={ loading }
+                searchedArtist={ searchedArtist }
                 handleUser={ this.handleUser }
+                handleSearch={ this.handleSearch }
               />) }
             />
             <Route
