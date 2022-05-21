@@ -4,27 +4,57 @@ import Header from './Header';
 import Loading from './Loading';
 import './album.css';
 import MusicCard from './MusicCard';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { getUser } from '../services/userAPI';
+import getMusics from '../services/musicsAPI';
 
 class Album extends React.Component {
-  componentDidMount() {
-    const { handleUser, handleAlbum } = this.props;
-    const { match: { params: { id } } } = this.props;
-    console.log('mounted');
-    handleUser();
-    handleAlbum(`${id}`);
+  state = {
+    loading: false,
+    userInfo: {
+      name: '',
+    },
+    loadedAlbum: [{
+      artworkUrl100: 'loading',
+      collectionName: 'loading',
+      artistName: 'loading',
+    }, {
+      trackName: 'loading',
+      previewUrl: 'loading',
+      trackId: 'loading',
+    }],
+    favoriteTracks: [{}],
   }
 
-  addFavorite = async ({ target: { checked } }, song) => {
-    const { handleFavorite } = this.props;
+  componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    console.log(`Status:${checked}`);
-    if (checked) {
-      await handleFavorite(song, id);
-    }
+    this.setState({ loading: true }, async () => {
+      const user = await getUser();
+      const album = await getMusics(id);
+      const favorites = await getFavoriteSongs();
+      this.setState({
+        userInfo: user,
+        loadedAlbum: album,
+        favoriteTracks: favorites,
+        loading: false,
+      });
+    });
+  }
+
+  addRemoveFavorite = async ({ target: { checked } }, song) => {
+    this.setState({ loading: true }, async () => {
+      if (checked) {
+        await addSong(song);
+      } else {
+        await removeSong(song);
+      }
+      const favorites = await getFavoriteSongs();
+      this.setState({ favoriteTracks: favorites, loading: false });
+    });
   }
 
   render() {
-    const { userInfo, loading, favoriteTracks, loadedAlbum } = this.props;
+    const { userInfo, loadedAlbum, favoriteTracks, loading } = this.state;
     const info = loadedAlbum[0];
     const tracks = loadedAlbum.slice(1);
     if (!loading) {
@@ -58,7 +88,7 @@ class Album extends React.Component {
                       keyid={ key }
                       idforTest={ track.trackId }
                       musicInfo={ track }
-                      addFavorite={ this.addFavorite }
+                      addRemoveFavorite={ this.addRemoveFavorite }
                       check={ checkmark }
                     />
                   );
@@ -74,20 +104,20 @@ class Album extends React.Component {
 }
 
 Album.propTypes = {
-  userInfo: propTypes.shape({
-    name: propTypes.string.isRequired,
-  }).isRequired,
-  loading: propTypes.bool.isRequired,
-  handleUser: propTypes.func.isRequired,
-  handleAlbum: propTypes.func.isRequired,
-  handleFavorite: propTypes.func.isRequired,
-  loadedAlbum: propTypes.arrayOf(propTypes.object).isRequired,
+  // userInfo: propTypes.shape({
+  //   name: propTypes.string.isRequired,
+  // }).isRequired,
+  // loading: propTypes.bool.isRequired,
+  // handleUser: propTypes.func.isRequired,
+  // handleAlbum: propTypes.func.isRequired,
+  // handleFavorite: propTypes.func.isRequired,
+  // loadedAlbum: propTypes.arrayOf(propTypes.object).isRequired,
   match: propTypes.shape({
     params: propTypes.shape({
       id: propTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  favoriteTracks: propTypes.arrayOf(propTypes.object).isRequired,
+  // favoriteTracks: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 export default Album;

@@ -1,18 +1,27 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import Header from './Header';
 import Loading from './Loading';
 import AlbumList from './AlbumList';
 import './search.css';
+import { getUser } from '../services/userAPI';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends React.Component {
   state = {
+    loading: false,
     artistName: '',
+    searchedArtist: '',
+    albumList: [],
+    userInfo: {
+      name: '',
+    },
   }
 
   componentDidMount() {
-    const { handleUser } = this.props;
-    handleUser();
+    this.setState({ loading: true }, async () => {
+      const user = await getUser();
+      this.setState({ loading: false, userInfo: user });
+    });
   }
 
   handleChange = ({ target }) => {
@@ -24,15 +33,18 @@ class Search extends React.Component {
 
   searchButtonClick = () => {
     const { artistName } = this.state;
-    const { handleSearch } = this.props;
-    this.setState({ artistName: '' }, () => {
-      handleSearch(artistName);
+    this.setState({ loading: true }, async () => {
+      const albums = await searchAlbumsAPI(artistName);
+      this.setState({ albumList: albums,
+        searchedArtist: artistName,
+        artistName: '',
+        loading: false,
+      });
     });
   }
 
   render() {
-    const { userInfo, loading, albumList, searchedArtist } = this.props;
-    const { artistName } = this.state;
+    const { userInfo, loading, albumList, searchedArtist, artistName } = this.state;
     const minChar = 2;
     if (!loading) {
       return (
@@ -66,16 +78,5 @@ class Search extends React.Component {
     return <Loading />;
   }
 }
-
-Search.propTypes = {
-  userInfo: propTypes.shape({
-    name: propTypes.string.isRequired,
-  }).isRequired,
-  loading: propTypes.bool.isRequired,
-  handleUser: propTypes.func.isRequired,
-  handleSearch: propTypes.func.isRequired,
-  albumList: propTypes.arrayOf(propTypes.object).isRequired,
-  searchedArtist: propTypes.string.isRequired,
-};
 
 export default Search;

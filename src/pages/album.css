@@ -36,7 +36,7 @@
 .track-list-container {
   margin-left: 50px;
   width: 500px;
-  background-image: linear-gradient(rgb(104, 156, 146, 0.3), rgb(248, 245, 241));
+  background-image: linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.6), rgb(248, 245, 241));
   border-top: solid 3px rgb(104, 156, 146, 0.5);
   border-bottom: solid 3px rgb(104, 156, 146, 0.5);
   padding-top: 20px;
@@ -67,10 +67,11 @@
   justify-content: center;
   align-items: center;
   width: 400px;
-  border-top: solid 3px rgb(104, 156, 146, 0.5);
-  border-bottom: solid 3px rgb(104, 156, 146, 0.5);
-  background-image: linear-gradient(rgba(142, 179, 171, 0.2), rgb(248, 245, 241));
+  border-top: solid 3px linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.2), rgb(248, 245, 241));
+  border-bottom: solid 3px rgb(160, 226, 212, 0.4);
+  background-image: linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.4), rgb(248, 245, 241));
   margin: auto;
+  border-radius: 50%;
 }
 
 .track-container div {
@@ -91,10 +92,11 @@
 }
 
 .favorite-checkbox {
+  display: none;
 }
 
 .favorite-label {
-  font-size: 2em;
+  font-size: 1em;
   cursor: pointer;
 }
 

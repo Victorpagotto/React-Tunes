@@ -1,16 +1,25 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import { getUser } from '../services/userAPI';
 import Header from './Header';
 import Loading from './Loading';
 
 class ProfileEdit extends React.Component {
+  state = {
+    loading: false,
+    userInfo: {
+      name: '',
+    },
+  }
+
   componentDidMount() {
-    const { handleUser } = this.props;
-    handleUser();
+    this.setState({ loading: true }, async () => {
+      const user = await getUser();
+      this.setState({ loading: false, userInfo: user });
+    });
   }
 
   render() {
-    const { userInfo, loading } = this.props;
+    const { userInfo, loading } = this.state;
     if (!loading) {
       return (
         <div data-testid="page-profile-edit">
@@ -22,13 +31,5 @@ class ProfileEdit extends React.Component {
     return <Loading />;
   }
 }
-
-ProfileEdit.propTypes = {
-  userInfo: propTypes.shape({
-    name: propTypes.string.isRequired,
-  }).isRequired,
-  loading: propTypes.bool.isRequired,
-  handleUser: propTypes.func.isRequired,
-};
 
 export default ProfileEdit;

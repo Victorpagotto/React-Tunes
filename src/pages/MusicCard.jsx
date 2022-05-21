@@ -6,21 +6,22 @@ class MusicCard extends React.Component {
     classes: '',
   }
 
-  // componentDidMount() {
-  //   this.changeLabelColor();
-  // }
+  componentDidMount() {
+    this.changeLabelColor();
+  }
 
-  // changeLabelColor = () => {
-  //   const { check } = this.props;
-  //   if (check) {
-  //     this.setState({ classes: ' red-heart' });
-  //   } else {
-  //     this.setState({ classes: ' black-heart' });
-  //   }
-  // }
+  changeLabelColor = () => {
+    const { check } = this.props;
+    if (check) {
+      this.setState({ classes: ' red-heart' });
+    } else {
+      this.setState({ classes: ' black-heart' });
+    }
+  }
 
   render() {
-    const { trackName, previewUrl, keyid, musicInfo, addFavorite, check } = this.props;
+    const { trackName, previewUrl, keyid, musicInfo, check } = this.props;
+    const { addRemoveFavorite } = this.props;
     const { classes } = this.state;
     return (
       <div className="track-container">
@@ -56,8 +57,8 @@ class MusicCard extends React.Component {
                 data-testid={ `checkbox-music-${keyid}` }
                 className="favorite-checkbox"
                 onChange={ (e) => {
-                  console.log('clickow');
-                  addFavorite(e, musicInfo);
+                  this.changeLabelColor();
+                  addRemoveFavorite(e, musicInfo);
                 } }
                 checked={ check }
               />
@@ -73,7 +74,7 @@ MusicCard.propTypes = {
   trackName: propTypes.string.isRequired,
   previewUrl: propTypes.string.isRequired,
   keyid: propTypes.number.isRequired,
-  addFavorite: propTypes.func.isRequired,
+  addRemoveFavorite: propTypes.func.isRequired,
   musicInfo: propTypes.shape({}).isRequired,
   check: propTypes.bool.isRequired,
 };
