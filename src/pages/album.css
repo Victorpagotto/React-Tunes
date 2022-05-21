@@ -91,12 +91,19 @@
 }
 
 .favorite-checkbox {
-  display: none;
 }
 
 .favorite-label {
-	color: red;
   font-size: 2em;
+  cursor: pointer;
+}
+
+.black-heart {
+  color: black;
+}
+
+.red-heart {
+  color: red;
 }
 
 @media only screen and ( max-width: 948px ) {

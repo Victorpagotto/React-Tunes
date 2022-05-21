@@ -2,8 +2,26 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 class MusicCard extends React.Component {
+  state = {
+    classes: '',
+  }
+
+  // componentDidMount() {
+  //   this.changeLabelColor();
+  // }
+
+  // changeLabelColor = () => {
+  //   const { check } = this.props;
+  //   if (check) {
+  //     this.setState({ classes: ' red-heart' });
+  //   } else {
+  //     this.setState({ classes: ' black-heart' });
+  //   }
+  // }
+
   render() {
-    const { trackName, previewUrl, keyid } = this.props;
+    const { trackName, previewUrl, keyid, musicInfo, addFavorite, check } = this.props;
+    const { classes } = this.state;
     return (
       <div className="track-container">
         <div className="track-name-container">
@@ -27,15 +45,21 @@ class MusicCard extends React.Component {
           <div>
             <label
               htmlFor={ `${keyid}` }
-              className="favorite-label"
+              className={ `favorite-label${classes}` }
               id={ `${keyid}.label` }
             >
-              ❤
+              Favorita
               <input
                 type="checkbox"
-                name=""
+                name={ `${keyid}` }
                 id={ `${keyid}` }
+                data-testid={ `checkbox-music-${keyid}` }
                 className="favorite-checkbox"
+                onChange={ (e) => {
+                  console.log('clickow');
+                  addFavorite(e, musicInfo);
+                } }
+                checked={ check }
               />
             </label>
           </div>
@@ -49,6 +73,9 @@ MusicCard.propTypes = {
   trackName: propTypes.string.isRequired,
   previewUrl: propTypes.string.isRequired,
   keyid: propTypes.number.isRequired,
+  addFavorite: propTypes.func.isRequired,
+  musicInfo: propTypes.shape({}).isRequired,
+  check: propTypes.bool.isRequired,
 };
 
 export default MusicCard;

@@ -6,28 +6,25 @@ import './album.css';
 import MusicCard from './MusicCard';
 
 class Album extends React.Component {
-  state = {
-    loadedAlbum: [{
-      artworkUrl100: 'loading',
-      collectionName: 'loading',
-      artistName: 'loading',
-    }, {
-      trackName: 'loading',
-      previewUrl: 'loading',
-      trackId: 'loading',
-    }],
-  }
-
   componentDidMount() {
     const { handleUser, handleAlbum } = this.props;
     const { match: { params: { id } } } = this.props;
+    console.log('mounted');
     handleUser();
-    handleAlbum(`${id}`, this);
+    handleAlbum(`${id}`);
+  }
+
+  addFavorite = async ({ target: { checked } }, song) => {
+    const { handleFavorite } = this.props;
+    const { match: { params: { id } } } = this.props;
+    console.log(`Status:${checked}`);
+    if (checked) {
+      await handleFavorite(song, id);
+    }
   }
 
   render() {
-    const { userInfo, loading } = this.props;
-    const { loadedAlbum } = this.state;
+    const { userInfo, loading, favoriteTracks, loadedAlbum } = this.props;
     const info = loadedAlbum[0];
     const tracks = loadedAlbum.slice(1);
     if (!loading) {
@@ -51,12 +48,18 @@ class Album extends React.Component {
               {
                 tracks.map((track) => {
                   const key = parseInt(track.trackId, 10);
+                  const checkmark = favoriteTracks
+                    .some((favtrack) => favtrack.trackId === track.trackId);
                   return (
                     <MusicCard
                       key={ key }
                       trackName={ track.trackName }
                       previewUrl={ track.previewUrl }
                       keyid={ key }
+                      idforTest={ track.trackId }
+                      musicInfo={ track }
+                      addFavorite={ this.addFavorite }
+                      check={ checkmark }
                     />
                   );
                 })
@@ -77,12 +80,14 @@ Album.propTypes = {
   loading: propTypes.bool.isRequired,
   handleUser: propTypes.func.isRequired,
   handleAlbum: propTypes.func.isRequired,
-  // loadedAlbum: propTypes.arrayOf(propTypes.object).isRequired,
+  handleFavorite: propTypes.func.isRequired,
+  loadedAlbum: propTypes.arrayOf(propTypes.object).isRequired,
   match: propTypes.shape({
     params: propTypes.shape({
       id: propTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  favoriteTracks: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 export default Album;

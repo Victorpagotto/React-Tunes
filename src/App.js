@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import { getUser } from './services/userAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import getMusics from './services/musicsAPI';
+import { addSong, getFavoriteSongs } from './services/favoriteSongsAPI';
 
 class App extends React.Component {
   state = {
@@ -20,12 +21,18 @@ class App extends React.Component {
     albumList: [],
     searchedArtist: '',
     loadedAlbum: [{
-      artworkUrl100: '',
+      artworkUrl100: 'loading',
+      collectionName: 'loading',
+      artistName: 'loading',
+    }, {
+      trackName: 'loading',
+      previewUrl: 'loading',
+      trackId: 'loading',
     }],
+    favoriteTracks: [{}],
   }
 
   handleUser = () => {
-    console.log('done');
     this.setState({ loading: true }, async () => {
       const user = await getUser();
       this.setState({ loading: false, userInfo: user });
@@ -39,19 +46,39 @@ class App extends React.Component {
     });
   }
 
-  handleAlbum = async (albumId, targetState) => {
+  getFavoriteSongsFiltered = async (chosenAlbum) => {
+    const favList = await getFavoriteSongs();
+    const songs = chosenAlbum.slice(1);
+    return songs.map((track) => {
+      const { trackId } = track;
+      return favList.find((song) => song.trackId === trackId);
+    }).filter((track) => track !== undefined);
+  }
+
+  handleAlbum = async (albumId) => {
     this.setState({ loading: true }, async () => {
       const chosenAlbum = await getMusics(albumId);
-      this.setState({ loadedAlbum: chosenAlbum }, () => {
-        targetState.setState({ loadedAlbum: chosenAlbum }, () => {
+      this.setState({ loadedAlbum: chosenAlbum }, async () => {
+        const favorites = await this.getFavoriteSongsFiltered(chosenAlbum);
+        this.setState({ favoriteTracks: favorites }, () => {
           this.setState({ loading: false });
         });
       });
     });
   }
 
+  handleFavorite = (song, albumId) => {
+    this.setState({ loading: true }, async () => {
+      await addSong(song);
+      const chosenAlbum = await getMusics(albumId);
+      const favList = await this.getFavoriteSongsFiltered(chosenAlbum);
+      this.setState({ loading: false, favoriteTracks: favList });
+    });
+  }
+
   render() {
     const { userInfo, loading, albumList, searchedArtist, loadedAlbum } = this.state;
+    const { favoriteTracks } = this.state;
     return (
       <section>
         <Router>
@@ -77,6 +104,9 @@ class App extends React.Component {
                 handleUser={ this.handleUser }
                 handleAlbum={ this.handleAlbum }
                 loadedAlbum={ loadedAlbum }
+                handleFavorite={ this.handleFavorite }
+                favoriteTracks={ favoriteTracks }
+                stateAccess={ this.stateAccess }
               />) }
             />
             <Route
