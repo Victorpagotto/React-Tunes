@@ -5,6 +5,7 @@
   --lb: rgb(160, 226, 212, 0.6);
 }
 
+/* Comentário tentando rodar o avaliador de novo */
 .profile-container {
   align-items: flex-start;
   background-image: linear-gradient(to bottom, var(--wh), var(--lb), var(--wh));
