@@ -1,39 +1,44 @@
 .header-container {
-  width: 100%;
   background-color: rgb(58, 94, 86);
+  border-bottom: solid 10px rgb(160, 226, 212);
   display: flex;
   flex-flow: column nowrap;
-  border-bottom: solid 10px rgb(160, 226, 212);
+  width: 100%;
 }
 
 .upper-container {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .username-container {
-  margin-right: 5%;
-  display: flex;
   align-items: center;
   background-color: white;
-  width: 200px;
   border-radius: 50px;
+  display: flex;
+  margin-right: 5%;
+  width: 200px;
 }
 
 .logo-container {
-  margin-left: 40px;
   color: white;
+  margin-left: 40px;
+}
+
+.user-image-container {
+  border-radius: 50%;
+  height: 25px;
+  margin: 5px;
+  width: 25px;
 }
 
 .user-image {
-  width: 25px;
-  height: 25px;
-  background-color: blue;
   border-radius: 50%;
-  margin: 5px;
+  height: 100%;
+  width: 100%;
 }
 
 .username {
@@ -41,30 +46,30 @@
 }
 
 .nav-container {
-  width: 100%;
-  height: 60px;
+  align-items: center;
   background-color: rgb(239, 250, 235);
   display: flex;
+  height: 60px;
   justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .link-container {
-  height: 100%;
-  flex-grow: 1;
   background-color: rgb(234, 248, 245);
   border: solid 3px white;
+  flex-grow: 1;
+  height: 100%;
 }
 
 .link {
-  color: rgb(58, 94, 86);
-  text-decoration: none;
-  font-size: 1.5em;
-  width: 100%;
-  height: 100%;
-  display: flex;
   align-items: center;
+  color: rgb(58, 94, 86);
+  display: flex;
+  font-size: 1.5em;
+  height: 100%;
   justify-content: center;
+  text-decoration: none;
+  width: 100%;
 }
 
 .link:hover {

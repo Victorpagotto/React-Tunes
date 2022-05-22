@@ -2,8 +2,8 @@
   display: flex;
   height: 100%;
   justify-content: center;
-  width: 100%;
   margin-bottom: 50px;
+  width: 100%;
 }
 
 .search-container {
@@ -15,8 +15,8 @@
 }
 
 .search-input {
-  border-radius: 12px;
   border: solid 6px rgb(58, 94, 86, 0.4);
+  border-radius: 12px;
   flex-grow: 1;
   height: 25px;
   outline: none;
@@ -29,8 +29,8 @@
 
 .search-button {
   background-color: rgb(58, 94, 86, 0.6);
-  border-radius: 10px;
   border: solid 5px rgb(197, 214, 210);
+  border-radius: 10px;
   color: white;
   font-size: 1.1em;
   height: 40px;

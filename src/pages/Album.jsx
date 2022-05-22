@@ -13,6 +13,9 @@ class Album extends React.Component {
     loading: false,
     userInfo: {
       name: '',
+      email: '',
+      image: '',
+      description: '',
     },
     loadedAlbum: [{
       artworkUrl100: 'loading',

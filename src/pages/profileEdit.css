@@ -1,0 +1,68 @@
+:root {
+
+  --wh: rgb(248, 245, 241);
+
+  --lb: rgb(160, 226, 212, 0.6);
+}
+
+.edit-profile-form {
+  align-items: center;
+  background-image: linear-gradient(to bottom, var(--wh), var(--lb), var(--wh));
+  border: solid 2px rgba(88, 134, 124, 0.3);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: 100px auto;
+  padding: 50px;
+  width: 350px;
+}
+
+.edit-user-image {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
+
+.edit-image-container {
+  border-radius: 50%;
+  height: 100px;
+  margin-right: 70px;
+  width: 100px;
+}
+
+.edit-image {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.user-profile-input {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.email-edit-label {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.edit-input {
+  background-color: rgb(248, 245, 241);
+  border: solid 3px rgba(88, 134, 124, 0.3);
+  height: 30px;
+  padding: 5px;
+}
+
+.profile-edit-description {
+  background-color: rgb(248, 245, 241);
+  border: solid 3px rgba(88, 134, 124, 0.3);
+  height: 200px;
+}
+
+.profile-edit-button {
+  background-color: rgb(186, 235, 224);
+  border: solid 5px rgba(0, 214, 168, 0.1);
+  height: 40px;
+  width: 300px;
+}

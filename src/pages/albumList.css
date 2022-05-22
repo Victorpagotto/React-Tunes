@@ -1,35 +1,35 @@
 .album-list-outter-container {
-  width: 80%;
   margin: auto;
+  width: 80%;
 }
 
 .text-album {
-  margin: 0 0 20px 6%;
   color: rgb(87, 122, 115);
+  margin: 0 0 20px 6%;
 }
 
 .no-album {
-  width: 100%;
-  text-align: center;
-  font-size: 3.5em;
   color: rgb(87, 122, 115);
+  font-size: 3.5em;
   margin-top: 10%;
+  text-align: center;
+  width: 100%;
 }
 
 .album-list-container {
-  width: 100%;
-  margin: auto;
-  justify-content: space-around;
-  flex-flow: row wrap;
-  display: flex;
   align-items: initial;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: auto;
+  width: 100%;
 }
 
 .album-container {
   align-items: center;
   background-color: rgb(197, 214, 210);
-  border-radius: 10px;
   border: solid 5px rgb(0, 0, 0, 0.1);
+  border-radius: 10px;
   color: white;
   display: flex;
   flex-flow: row wrap;
@@ -49,9 +49,9 @@
 }
 
 .album-image {
+  border-radius: 7px;
   height: 100%;
   width: 100%;
-  border-radius: 7px;
 }
 
 .album-container p {
@@ -59,8 +59,8 @@
 }
 
 .album-name {
-  font-weight: 700;
   font-size: 1em;
+  font-weight: 700;
 }
 
 .album-artist {

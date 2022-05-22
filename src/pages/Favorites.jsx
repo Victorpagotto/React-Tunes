@@ -11,8 +11,11 @@ class Favorites extends React.Component {
     loading: false,
     userInfo: {
       name: '',
+      email: '',
+      image: '',
+      description: '',
     },
-    favoriteTracks: [{}],
+    favoriteTracks: [],
   }
 
   componentDidMount() {

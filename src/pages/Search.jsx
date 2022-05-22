@@ -14,6 +14,9 @@ class Search extends React.Component {
     albumList: [],
     userInfo: {
       name: '',
+      email: '',
+      image: '',
+      description: '',
     },
   }
 

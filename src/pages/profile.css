@@ -1,19 +1,26 @@
+:root {
+
+  --wh: rgb(248, 245, 241);
+
+  --lb: rgb(160, 226, 212, 0.6);
+}
+
 .profile-container {
-  width: 350px;
-  margin: 100px auto;
-  padding: 0 74px;
+  align-items: flex-start;
+  background-image: linear-gradient(to bottom, var(--wh), var(--lb), var(--wh));
   border-radius: 50px;
   display: flex;
   flex-flow: column nowrap;
-  align-items: flex-start;
   justify-content: space-between;
-  background-image: linear-gradient(to bottom, rgb(248, 245, 241), rgb(160, 226, 212, 0.4), rgb(248, 245, 241));
+  margin: 100px auto;
+  padding: 0 74px;
+  width: 350px;
 }
 
 .profile-edit-pic-container {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .info-container {
@@ -21,30 +28,30 @@
 }
 
 .profile-image-container {
-  margin: 20px;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
   border: solid 3px rgb(58, 94, 86);
+  border-radius: 50%;
+  height: 100px;
+  margin: 20px;
+  width: 100px;
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
+  height: 100%;
+  width: 100%;
 }
 
 .edit-profile-link {
-  height: 30px;
-  width: 120px;
-  display: flex;
-  justify-content: center;
   align-items: center;
   border: solid 3px rgb(90, 156, 142);
-  margin-right: 30px;
-  color: rgb(90, 156, 142);
-  text-decoration: none;
   border-radius: 10px;
+  color: rgb(90, 156, 142);
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  margin-right: 30px;
+  text-decoration: none;
+  width: 120px;
 }
 
 .info-tag, .data {
@@ -52,8 +59,8 @@
 }
 
 .info-tag {
-  font-weight: 700;
   color: rgb(90, 156, 142);
+  font-weight: 700;
 }
 
 .data {

@@ -5,7 +5,10 @@ import './header.css';
 
 class Header extends React.Component {
   render() {
+    const url = 'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
     const { userInfo } = this.props;
+    let { image } = userInfo;
+    if (image === '') image = url;
     return (
       <header data-testid="header-component" className="header-container">
         <div className="upper-container">
@@ -13,7 +16,9 @@ class Header extends React.Component {
             <h1 className="logo">TryBeTune</h1>
           </div>
           <div className="username-container">
-            <div className="user-image" />
+            <div className="user-image-container">
+              <img src={ image } alt="user profile" className="user-image" />
+            </div>
             <span
               className="username"
               data-testid="header-user-name"
@@ -59,6 +64,7 @@ class Header extends React.Component {
 Header.propTypes = {
   userInfo: propTypes.shape({
     name: propTypes.string.isRequired,
+    image: propTypes.string.isRequired,
   }).isRequired,
 };
 

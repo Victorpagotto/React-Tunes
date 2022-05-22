@@ -1,45 +1,54 @@
+:root {
+
+  --wh: rgb(248, 245, 241);
+
+  --lb: rgb(160, 226, 212, 0.6);
+}
+
 .album-track-list-container {
+  align-items: center;
   display: flex;
-  width: 75%;
-  min-width: 480px;
-  margin: auto;
   flex-flow: row wrap;
   justify-content: space-around;
-  align-items: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin: 100px auto;
+  min-width: 480px;
+  width: 75%;
 }
 
 .album-info-container {
-  display: flex;
-  justify-content: baseline;
   align-items: center;
-  flex-flow: column nowrap;
   align-self: flex-start;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: baseline;
   max-width: 300px;
   text-align: center;
 }
 
 .track-album-image {
-  width: 250px;
   height: 250px;
+  width: 250px;
 }
 
 .album-names {
-  display: flex;
-  justify-content: left;
   align-items: center;
+  display: flex;
   flex-flow: column nowrap;
+  justify-content: left;
   margin-bottom: 50px;
 }
 
 .track-list-container {
-  margin-left: 50px;
-  width: 500px;
-  background-image: linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.6), rgb(248, 245, 241));
-  border-top: solid 3px rgb(104, 156, 146, 0.5);
+  background-image: linear-gradient(to right, var(--wh), var(--lb), var(--wh));
   border-bottom: solid 3px rgb(104, 156, 146, 0.5);
+  border-top: solid 3px rgb(104, 156, 146, 0.5);
+  margin-left: 50px;
   padding-top: 20px;
+  width: 500px;
+}
+
+.track-container div {
+  width: inherit;
 }
 
 .track-list-container div:first-child {
@@ -57,25 +66,21 @@
 }
 
 .track-album-image img {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 
 .track-container {
+  align-items: center;
+  background-image: linear-gradient(to right, var(--wh), var(--lb), var(--wh));
+  border-bottom: solid 3px rgb(160, 226, 212, 0.4);
+  border-radius: 50%;
+  border-top: solid 3px linear-gradient(to right, var(--wh), var(--lb), var(--wh));
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
-  width: 400px;
-  border-top: solid 3px linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.2), rgb(248, 245, 241));
-  border-bottom: solid 3px rgb(160, 226, 212, 0.4);
-  background-image: linear-gradient(to right, rgb(248, 245, 241), rgb(160, 226, 212, 0.4), rgb(248, 245, 241));
   margin: auto;
-  border-radius: 50%;
-}
-
-.track-container div {
-  width: inherit;
+  width: 400px;
 }
 
 .track-name-container {
@@ -83,8 +88,8 @@
 }
 
 .audio-container {
+  align-items: center;
   display: flex;
-  align-items:center
 }
 
 .audio {
@@ -96,8 +101,8 @@
 }
 
 .favorite-label {
-  font-size: 1em;
   cursor: pointer;
+  font-size: 1em;
 }
 
 .black-heart {
@@ -108,13 +113,15 @@
   color: red;
 }
 
-@media only screen and ( max-width: 948px ) {
+@media only screen and ( max-width : 948px ) {
+
   .album-track-list-container {
     justify-content: center;
   }
 }
 
-@media only screen and ( max-width: 850px ) {
+@media only screen and ( max-width : 850px ) {
+
   .track-list-container {
     margin: 0;
   }
